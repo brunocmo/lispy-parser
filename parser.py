@@ -58,13 +58,16 @@ class LispyTransformer(InlineTransformer):
 
     def string(self, value):
         return str(eval(value))
+
     def number(self, token):
         return float(token)
+
     def boolean(self, bool):
         if bool == '#t':
             return True
         elif bool == '#f':
             return False
+
     def symbol(self, value):
         return Symbol(value)
     
@@ -73,3 +76,8 @@ class LispyTransformer(InlineTransformer):
 
     def quote(self, expr):
         return [Symbol('quote'), expr]
+
+"""
+    def char(self, token):
+        return 
+"""
