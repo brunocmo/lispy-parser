@@ -67,3 +67,6 @@ class LispyTransformer(InlineTransformer):
             return False
     def symbol(self, value):
         return Symbol(value)
+    
+    def lista(self, *expr):
+        return list(expr)
