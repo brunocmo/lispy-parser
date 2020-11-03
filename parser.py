@@ -55,3 +55,15 @@ class LispyTransformer(InlineTransformer):
         "space": " ",
         "tab": "\t",
     }
+
+    def string(self, value):
+        return str(eval(value))
+    def number(self, token):
+        return float(token)
+    def boolean(self, bool):
+        if bool == '#t':
+            return True
+        elif bool == '#f':
+            return False
+    def symbol(self, value):
+        return Symbol(value)
