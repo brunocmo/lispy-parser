@@ -27,8 +27,6 @@ grammar = Lark(
 
 ?quote : "'" expr -> quote
 
-?lambda : list expr -> lambda
-
 SYMBOL  : /[-!+\/*@$%^&~<>?|\\\w=]+/
 STRING    : /"[^"\\]*(\\[^\n\t\r\f][^"\\]*)*"/
 NUMBER : /-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/
@@ -80,4 +78,7 @@ class LispyTransformer(InlineTransformer):
 """
     def char(self, token):
         return 
+
+    def start(self, token):
+        return
 """
