@@ -70,3 +70,6 @@ class LispyTransformer(InlineTransformer):
     
     def lista(self, *expr):
         return list(expr)
+
+    def quote(self, expr):
+        return [Symbol('quote'), expr]
