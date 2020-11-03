@@ -9,7 +9,36 @@ class Symbol(NamedTuple):
 
 grammar = Lark(
     r"""
-start : "implemente-aqui!"
+
+?start : expr
+
+?bool: TRUE -> boolean | FALSE -> boolean
+
+?atom: STRING -> string 
+     | NUMBER -> number 
+     | SYMBOL -> symbol 
+     | bool 
+     | NAME -> name 
+     | CHAR -> char
+
+?list : "(" expr* ")" -> lista
+
+?expr : atom | list | quote
+
+?quote : "'" expr -> quote
+
+?lambda : list expr -> lambda
+
+SYMBOL  : /[-!+\/*@$%^&~<>?|\\\w=]+/
+STRING    : /"[^"\\]*(\\[^\n\t\r\f][^"\\]*)*"/
+NUMBER : /-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/
+NAME   : /[a-zA-Z][-?\w]*/
+CHAR   : /\#\\\w+/
+TRUE : "#t"
+FALSE: "#f"
+
+%ignore /\s+/
+%ignore /;[^\n]*/
 """)
 
 
