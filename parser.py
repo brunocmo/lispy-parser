@@ -10,7 +10,7 @@ class Symbol(NamedTuple):
 grammar = Lark(
     r"""
 
-?start : expr
+?start : expr+
 
 ?bool: TRUE -> boolean | FALSE -> boolean
 
@@ -75,10 +75,15 @@ class LispyTransformer(InlineTransformer):
     def quote(self, expr):
         return [Symbol('quote'), expr]
 
-"""
     def char(self, token):
-        return 
+        if len(token) == 3:
+            return str(token[2])
+        else:
+            token = token[2:].lower()
+            return self.CHARS[token]
 
-    def start(self, token):
-        return
-"""
+    def start(self, *args):
+        if len(list(args)) > 1:
+            return [Symbol("begin")] + list(args)
+        else:
+            return args

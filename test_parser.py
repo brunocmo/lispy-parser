@@ -61,7 +61,7 @@ def value(st):
         return value
 
 
-@lru_cache
+@lru_cache()
 def symbol(x):
     return mod()[-1](x)
 
